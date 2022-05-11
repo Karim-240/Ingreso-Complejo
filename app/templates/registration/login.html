@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ComplexRex</title>
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'app/css/loginCSS.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="screen">
+            <div class="screen__content">
+                <form class="login" method="post" action="{% url 'login' %}">
+
+                    {% csrf_token %}
+                    {% load widget_tweaks %}
+
+                    <div class="login__field">
+                        <i class="login__icon fas fa-user"></i>
+                        
+                        {{ form.username.label_tag }}
+                        {{ form.username | add_class:'login__input' }}
+                        
+                    </div>
+                    <div class="login__field">
+                        <i class="login__icon fas fa-lock"></i>
+                        {{ form.password.label_tag }}
+                        {{ form.password | add_class:'login__input'}}
+                                             
+                    </div>
+                    <input type="submit" value="login" />
+                    <input type="hidden" name="next" value="{{ next }}" />				
+                </form>
+                <div class="social-login">
+                    <h3>ComplexRex</h3>
+                    {# Assumes you setup the password_reset view in your URLconf #}
+                    <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+                </div>
+            </div>
+            <div class="screen__background">
+                <span class="screen__background__shape screen__background__shape4"></span>
+                <span class="screen__background__shape screen__background__shape3"></span>		
+                <span class="screen__background__shape screen__background__shape2"></span>
+                <span class="screen__background__shape screen__background__shape1"></span>
+            </div>		
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+

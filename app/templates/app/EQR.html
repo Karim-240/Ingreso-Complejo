@@ -1,0 +1,37 @@
+{% extends "app/base.html"%}
+
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'app/css/QR.css' %}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="{% static 'app/js/EQR.js' %}"></script>
+{% endblock %}
+
+
+
+
+{% block content %}
+
+<div class="container-QR-main">
+<section class="container-QR" >
+    <div class="form-qr">
+        <h2>Elige a un usuario para crear su QR</h2>
+        <select name="name" id="nameQR">
+            <option id="selecciona" value="" data-qr="">Seleccionar</option>
+            {% for p in usuarios %}
+            <option id="{{ p.id }}" data-casa="14-A" data-qr="{{ p.QR }}"  value="{{ p.nombre }}" >{{ p.nombre }} </option>
+            {% endfor %}
+          </select> 
+        <button onclick="generarQR()" class="btnEQR">Generar código QR</button>
+    </div>
+</section>
+<section class="container-QR" >
+    
+    <img src="" id="dirQR" alt="">
+</section>
+</div>
+
+
+{% endblock %}
+
+

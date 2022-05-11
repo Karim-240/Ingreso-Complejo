@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complex Rex</title>
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,700;1,400;1,700&family=Open+Sans:ital,wght@0,400;0,700;1,600&display=swap" rel="stylesheet">
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app/css/estilos.css' %}">
+    {% block css %}{% endblock %}    
+</head>
+<body>
+
+    
+    <header id="header">
+        <div class="contenedor_logo">
+            <img src="{% static 'app/img/logo_small.png' %}" alt="" style="width: 35%; margin: 10px;
+            background-color: rgb(255,255,255,.5); padding: 10px; border-radius: 15px;
+            " class="logoComplex">   
+           </div>
+
+        <div>
+            
+            <nav id="nav" style=" border-radius: 15px;">
+                <ul>
+                    <li>
+                        <a href="{% url 'LQR' %}"> Leer QR </a> </a>
+                    </li>
+                    <li>
+                        {% if user.is_staff %}
+                        <a href="{% url 'EQR' %}">Crear QR</a>
+                        {% else%}
+                        <a href="{% url 'EQR' %}" 
+                        style="pointer-events: none; 
+                        cursor: default; 
+                        color: grey;">Crear QR</a>
+                        <a href=""  
+                         style="position: absolute;
+                         pointer-events: none; 
+                         cursor: default; 
+                         color: yellow;
+                         font-size: 15px;
+                         opacity: 0.7;
+                         margin-top: 20px;
+                         left: 78%;">(Solo Admins)</a>
+                        {% endif%}
+                    </li>
+                    <li>
+                        {% if user.is_staff %}
+                        <a href="{% url 'dashboard' %}">Administracion</a>
+                        {% else%}
+                        <a href="{% url 'dashboard' %}" style="pointer-events: none; 
+                        cursor: default; 
+                        color: grey;">Administracion</a>
+                        {% endif%}
+                    </li>
+                    <li>
+                        <a href="{% url 'logout' %}">Cerrar sesion</a>
+                    </li>
+
+                </ul>
+            </nav>
+
+        </div>
+
+    </header>
+
+    <div id="contenido">
+
+            {% block content %}
+            
+            {% endblock %}
+
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
+
+   
+
+    {% block js %}
+    {% endblock %}
+</body>
+</html>

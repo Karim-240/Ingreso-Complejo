@@ -1,0 +1,80 @@
+{% extends "app/base.html" %}
+
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'app/css/QR.css' %}">
+<link rel="stylesheet" href="{% static 'app/css/datatables.min.css' %}">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+{% endblock %}
+
+{% block content %}
+
+
+
+<div class="button-lectura">
+<!--<button type="button" class="btn-LQR" onclick="{% url 'home' %}"> Comience la lectura de códigos</button>-->
+<a href="{% url 'showLectorQR' %}" class="btn-LQR"> Comience la lectura de códigos</a>
+</div>
+  
+<div class="row-lecturaQR">
+  <table id="myTable">
+    <tr class="header">
+      <th>Resultado del código QR</th>
+    </tr>
+
+    <tr>
+      <td>{{QR}}</td>
+    </tr>
+
+  </table>
+</div>
+
+<div class="row-lecturaQR">
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+
+  <table id="myTable">
+    <tr class="header">
+      <th>Nombre</th>
+      <th>apellidos</th>
+      <th>Estatus</th>
+      <th>Token</th>
+      <th>Fecha de Creacion</th>
+    </tr>
+    {% for u in usuarios %}
+    <tr>
+      <td>{{u.nombre}}</td>
+      <td>{{u.apellidos}}</td>
+      <td>{{u.status}}</td>
+      <td>{{u.token}}</td>
+      <td>{{u.fechaCreacion}}</td>
+    </tr>
+    {% endfor %}
+
+  </table>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }       
+    }
+  }
+  </script>
+
+
+{% endblock %}
